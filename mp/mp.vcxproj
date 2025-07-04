@@ -61,12 +61,14 @@
     <DriverTargetPlatform>Desktop</DriverTargetPlatform>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <TargetVersion>Windows7</TargetVersion>
+    <TargetVersion>Windows10</TargetVersion>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
     <ConfigurationType>Driver</ConfigurationType>
     <DriverType>KMDF</DriverType>
     <DriverTargetPlatform>Desktop</DriverTargetPlatform>
+    <KMDF_VERSION_MAJOR>1</KMDF_VERSION_MAJOR>
+    <KMDF_VERSION_MINOR>9</KMDF_VERSION_MINOR>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <TargetVersion>Windows10</TargetVersion>
@@ -75,6 +77,8 @@
     <ConfigurationType>Driver</ConfigurationType>
     <DriverType>KMDF</DriverType>
     <DriverTargetPlatform>Desktop</DriverTargetPlatform>
+    <KMDF_VERSION_MAJOR>1</KMDF_VERSION_MAJOR>
+    <KMDF_VERSION_MINOR>9</KMDF_VERSION_MINOR>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <TargetVersion>Windows10</TargetVersion>
@@ -129,12 +133,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
     <IncludePath>$(ProjectDir);$(IncludePath);..\inc</IncludePath>
-    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
+    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
     <IncludePath>$(ProjectDir);$(IncludePath);..\inc</IncludePath>
-    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
+    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
@@ -377,10 +383,10 @@
       <SpecifyDriverVerDirectiveDate>true</SpecifyDriverVerDirectiveDate>
     </Inf>
     <PostBuildEvent>
-      <Command>copy ..\LICENSE-2.0.txt $(OutDir)</Command>
+      <Command>copy ..\LICENSE $(OutDir)$(ProjectName)</Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Copy LICENSE-2.0.txt...</Message>
+      <Message>Copy LICENSE...</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -410,10 +416,10 @@
       <SpecifyDriverVerDirectiveDate>true</SpecifyDriverVerDirectiveDate>
     </Inf>
     <PostBuildEvent>
-      <Command>copy ..\LICENSE-2.0.txt $(OutDir)</Command>
+      <Command>copy ..\LICENSE $(OutDir)$(ProjectName)</Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Copy LICENSE-2.0.txt...</Message>
+      <Message>Copy LICENSE...</Message>
     </PostBuildEvent>
     <DriverSign />
     <DriverSign>
@@ -456,6 +462,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\inc\trcmp.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <Inf Include="..\mp.inx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

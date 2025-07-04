@@ -67,4 +67,9 @@
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Inf Include="..\mp.inx">
+      <Filter>Driver Files</Filter>
+    </Inf>
+  </ItemGroup>
 </Project>
